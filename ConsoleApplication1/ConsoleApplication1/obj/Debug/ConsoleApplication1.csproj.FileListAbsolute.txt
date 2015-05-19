@@ -1,1 +1,6 @@
 D:\Training\training\ConsoleApplication1\ConsoleApplication1\bin\Debug\ConsoleApplication1.exe.config
+d:\Training\training\ConsoleApplication1\ConsoleApplication1\bin\Debug\ConsoleApplication1.exe
+d:\Training\training\ConsoleApplication1\ConsoleApplication1\bin\Debug\ConsoleApplication1.pdb
+d:\Training\training\ConsoleApplication1\ConsoleApplication1\obj\Debug\ConsoleApplication1.csprojResolveAssemblyReference.cache
+d:\Training\training\ConsoleApplication1\ConsoleApplication1\obj\Debug\ConsoleApplication1.exe
+d:\Training\training\ConsoleApplication1\ConsoleApplication1\obj\Debug\ConsoleApplication1.pdb
