@@ -1,0 +1,103 @@
+﻿@model MvcDemo.Models.MovieViewModel
+
+@{
+    ViewBag.Title = "Movies";
+}
+
+<h2>Movies</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+<td align="center">
+    @{
+        int showItems = 3;
+        for (int i = 0; i < Model.PageCount; i++ )
+        {
+            int page = i + 1;
+            int activePage = Model.CurrentPage + 1;
+            
+            if (page == activePage)
+            {
+                <b>@Html.DisplayFor(current => activePage)</b>
+                continue;
+            }
+
+            //First block
+            if (page <= showItems)
+            {
+                @Html.ActionLink(page.ToString(), "Index", new { page = i });
+                continue;
+            }
+
+            //Center block (with active page)
+            if (page <= activePage + showItems)
+            {
+                if (page < activePage - showItems)
+                {
+                    page = activePage - showItems;
+                    i = page - 1;
+                    <text>...</text>
+                }
+
+                @Html.ActionLink(page.ToString(), "Index", new { page = i });
+                if (page == showItems && activePage - showItems > page)
+                {
+                    i = activePage - showItems;
+                }
+                continue;
+            }
+            
+            //Last block
+            if (page <= Model.PageCount - showItems)
+            {
+                page = Model.PageCount - showItems + 1;
+                i = page - 1;
+                <text>...</text>
+            }            
+             @Html.ActionLink(page.ToString(), "Index", new { page = i });
+        }
+}
+</td>
+
+<table>
+    @{var movie = Model.Movies.FirstOrDefault(); }
+    <tr>
+        <th>
+            @Html.DisplayNameFor(id => movie.ID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(title => movie.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(director => movie.Director)
+        </th>
+        <th>
+            @Html.DisplayNameFor(date => movie.Date)
+        </th>
+    </tr>
+
+@foreach (var item in Model.Movies) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Director)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Date)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>
