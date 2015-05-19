@@ -1,0 +1,27 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:ViewModel="clr-namespace:WpfApplication.ViewModel" x:Class="WpfApplication.MainWindow"
+        Title="MainWindow" Height="350" Width="525">
+    <Grid>
+        <ListView Margin="10,10,85,10" RenderTransformOrigin="0.489,0.515" x:Name="UserList" MouseDoubleClick="UserList_OnMouseDoubleClick">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="User" DisplayMemberBinding="{Binding User}" Width="150"/>
+                    <GridViewColumn Header="Comment" DisplayMemberBinding="{Binding Comment}" Width="200"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Button Content="Add..." Height="27" Margin="0,29,10,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="70" Click="Add_Click"/>
+        <Button Content="Edit..." Height="32" Margin="0,61,10,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="70" Click="Edit_Click"/>
+        <Button Content="Delete" Height="34" Margin="0,98,10,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="70" Command="{Binding Mode=OneWay}">
+            <Button.BindingGroup>
+                <BindingGroup/>
+            </Button.BindingGroup>
+            <Button.DataContext>
+                <ViewModel:DeleteCommand/>
+            </Button.DataContext>
+        </Button>
+
+    </Grid>
+</Window>
