@@ -105,8 +105,5 @@ namespace WpfApplication.Model
                 Debug.WriteLine(e);
             }
         }
-
-
     }
-
 }

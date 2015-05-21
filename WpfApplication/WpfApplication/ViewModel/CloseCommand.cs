@@ -1,15 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace WpfApplication.ViewModel
 {
     class CloseCommand : ICommand
     {
-        private UserViewModel _model;
+        private readonly UserViewModel _model;
 
         public CloseCommand(UserViewModel model)
         {
