@@ -57,12 +57,20 @@
     </ApplicationDefinition>
     <Compile Include="Model\UserInfo.cs" />
     <Compile Include="Model\UsersModel.cs" />
+    <Compile Include="Properties\Annotations.cs" />
     <Compile Include="User.xaml.cs">
       <DependentUpon>User.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\AddCommand.cs" />
+    <Compile Include="ViewModel\BaseViewModel.cs" />
+    <Compile Include="ViewModel\CloseCommand.cs" />
     <Compile Include="ViewModel\DeleteCommand.cs" />
     <Compile Include="ViewModel\EditCommand.cs" />
+    <Compile Include="ViewModel\EditPopupCommand.cs" />
+    <Compile Include="ViewModel\MainWindowViewModel.cs" />
+    <Compile Include="ViewModel\AddPopupCommand.cs" />
+    <Compile Include="ViewModel\UsersCollectionWrapper.cs" />
+    <Compile Include="ViewModel\UserViewModel.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

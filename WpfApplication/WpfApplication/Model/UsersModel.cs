@@ -10,14 +10,17 @@ namespace WpfApplication.Model
     public interface IUserModel  : IDisposable
     {
         IEnumerable<IUserInfo> Users { get; }
+        event UpdateEvent ModelChanged;
 
-        IUserInfo CreateUserInfo(string user, string comment);
+        void Add(string user, string comment);
+        void Remove(IUserInfo item);
         void Remove(IEnumerable items);
     }
 
-     class UsersModel : IUserModel
+    class UsersModel : IUserModel
     {
         private List<UserInfo> usersList;
+        public event UpdateEvent ModelChanged;
 
         IEnumerable<IUserInfo> IUserModel.Users
         {
@@ -34,19 +37,39 @@ namespace WpfApplication.Model
             StoreList();
         }
 
-        public IUserInfo CreateUserInfo(string user, string comment)
+        public void Add(string user, string comment)
         {
-            UserInfo userInfo = new UserInfo() {User = user, Comment = comment};
+            UserInfo userInfo = new UserInfo(user, comment);
             usersList.Add(userInfo);
-            return userInfo;
+            userInfo.Updated += FireModelChanged;
+            FireModelChanged();
         }
+
+         public void Remove(IUserInfo item)
+         {
+             usersList.Remove(item as UserInfo);
+             FireModelChanged();
+         }
 
          public void Remove(IEnumerable items)
          {
+             List<IUserInfo> removing = new List<IUserInfo>();
+
              foreach (var item in items)
              {
-                 usersList.Remove(item as UserInfo);
+                 removing.Add(item as IUserInfo);
              }
+
+             foreach (var item in removing)
+             {
+                 Remove(item);
+             }
+         }
+
+         private void FireModelChanged()
+         {
+             UpdateEvent handler = ModelChanged;
+             if (handler != null) handler();
          }
 
          private void RestoreList()
@@ -56,6 +79,11 @@ namespace WpfApplication.Model
                 var jsonSerialiser = new JavaScriptSerializer();
                 string data = File.ReadAllText("data.txt");
                 usersList = jsonSerialiser.Deserialize<List<UserInfo>>(data);
+                foreach (var user in usersList)
+                {
+                    user.Updated += FireModelChanged;
+                }
+                FireModelChanged();
             }
             catch (Exception e)
             {

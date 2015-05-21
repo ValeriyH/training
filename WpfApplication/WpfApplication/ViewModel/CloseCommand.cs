@@ -1,34 +1,31 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using WpfApplication.Model;
 
 namespace WpfApplication.ViewModel
 {
-    class DeleteCommand : ICommand
+    class CloseCommand : ICommand
     {
-        private MainWindowViewModel _viewModel;
-        public DeleteCommand(MainWindowViewModel viewModel)
+        private UserViewModel _model;
+
+        public CloseCommand(UserViewModel model)
         {
-            _viewModel = viewModel;
+            _model = model;
         }
 
         public bool CanExecute(object parameter)
         {
-            //Only if some items selected
-            return true;
+            return _model.CloseAction != null;
         }
 
         public void Execute(object parameter)
         {
-            IEnumerable collectioin = parameter as IEnumerable;
-            if (collectioin != null)
+            if (_model.CloseAction != null)
             {
-                App.Model.Remove(collectioin);
+                _model.CloseAction();
             }
         }
 

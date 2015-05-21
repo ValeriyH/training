@@ -18,14 +18,14 @@ namespace WpfApplication
 
         protected override void OnStartup(StartupEventArgs e)
         {
-            Model = new UsersModel();
             base.OnStartup(e);
+            Model = new UsersModel();
         }
 
         protected override void OnExit(ExitEventArgs e)
         {
-            base.OnExit(e);
             Model.Dispose();
+            base.OnExit(e);
         }
     }
 }

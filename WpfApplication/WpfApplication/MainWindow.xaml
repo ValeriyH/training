@@ -1,10 +1,15 @@
 ﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:ViewModel="clr-namespace:WpfApplication.ViewModel" x:Class="WpfApplication.MainWindow"
+        xmlns:local="clr-namespace:WpfApplication" x:Name="window" x:Class="WpfApplication.MainWindow"
         Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        <ListView Margin="10,10,85,10" RenderTransformOrigin="0.489,0.515" x:Name="UserList" MouseDoubleClick="UserList_OnMouseDoubleClick">
+    <Window.Resources>
+        <ResourceDictionary xmlns:vm="clr-namespace:WpfApplication.ViewModel">
+            <vm:MainWindowViewModel x:Key="MainViewModel"></vm:MainWindowViewModel>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid DataContext="{Binding Source={StaticResource MainViewModel}}">
+        <ListView ItemsSource="{Binding Users}" Margin="10,10,85,10" RenderTransformOrigin="0.489,0.515" x:Name="UserList" IsSynchronizedWithCurrentItem="True">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="User" DisplayMemberBinding="{Binding User}" Width="150"/>
@@ -12,16 +17,9 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button Content="Add..." Height="27" Margin="0,29,10,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="70" Click="Add_Click"/>
-        <Button Content="Edit..." Height="32" Margin="0,61,10,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="70" Click="Edit_Click"/>
-        <Button Content="Delete" Height="34" Margin="0,98,10,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="70" Command="{Binding Mode=OneWay}">
-            <Button.BindingGroup>
-                <BindingGroup/>
-            </Button.BindingGroup>
-            <Button.DataContext>
-                <ViewModel:DeleteCommand/>
-            </Button.DataContext>
-        </Button>
+        <Button Content="Add..." Height="27" Margin="0,29,10,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="70" Command="{Binding AddButton, Mode=OneWay}" CommandParameter="{Binding Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}" />
+        <Button Content="Edit..." Height="32" Margin="0,61,10,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="70" Command="{Binding EditButton, Mode=OneWay}" CommandParameter="{Binding ElementName=window, Mode=OneWay}"/>
+        <Button Content="Delete" Height="34" Margin="0,98,10,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="70" Command="{Binding DeleteButton, Mode=OneWay}" CommandParameter="{Binding SelectedItems, ElementName=UserList}"/>
 
     </Grid>
 </Window>
