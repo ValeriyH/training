@@ -396,25 +396,25 @@ namespace DotNetTrain
         }
     }
 
-    static class StringExtension
-    {
-        static public string MyMethod(this string s)
-        {
-            return String.Format("My Method is added to String :) {0}", s);
-        }
+    //static class StringExtension
+    //{
+    //    static public string MyMethod(this string s)
+    //    {
+    //        return String.Format("My Method is added to String :) {0}", s);
+    //    }
 
-        static public string operator +(this string c1, string c2)
-        {
-            return "";
-        }
-    }
+    //    static public string operator +(this string c1, string c2)
+    //    {
+    //        return "";
+    //    }
+    //}
 
     static public class ExtensionTest
     {
         static public void ExecuteTest()
         {
             string test = "Test";
-            Console.WriteLine(test.MyMethod());
+            //Console.WriteLine(test.MyMethod());
 
             //var p; - Error. var should be always initiated
             var anonimus = new { Name = "Vasya", Age = 30 };
@@ -655,6 +655,32 @@ namespace DotNetTrain
 
         static void Main(string[] args)
         {
+            List<int> tl = new List<int>();
+            tl.Add(10);
+            tl.Add(20);
+            tl.Add(30);
+            tl.Add(40);
+
+            var en1 = tl.GetEnumerator();
+            var en2 = en1;
+            en1.MoveNext();
+            Console.WriteLine(en1.Current);
+            Console.WriteLine(en2.Current);
+
+            bool b;
+
+            en1 = tl.GetEnumerator();
+            b = en1 == en2;
+
+            b = en2.MoveNext();
+            b = en2.MoveNext();
+            b = en2.MoveNext();
+            b = en2.MoveNext();
+            b = en2.MoveNext();
+            b = en2.MoveNext();
+            b = en2.MoveNext();
+
+
             //EnumerationTest();
 
             //----------------
