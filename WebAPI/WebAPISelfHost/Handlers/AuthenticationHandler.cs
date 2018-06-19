@@ -40,6 +40,7 @@ namespace WebAPISelfHost.Handlers
                 GenericIdentity indentity = new GenericIdentity(userid);
                 String[] indentity_roles = { "Manager", "Teller" };
                 GenericPrincipal principal = new GenericPrincipal(indentity, indentity_roles);
+                
                 SetPrincipal(principal);
             }
             // Call the inner handler.
