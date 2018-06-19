@@ -8,6 +8,7 @@ using WebAPI.Models;
 
 namespace WebAPI.Controllers
 {
+    [Authorize]
     public class PaymentController : ApiController
     {
         static PaymentStorage _data = new PaymentStorage();

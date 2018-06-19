@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.SelfHost;
+using WebAPISelfHost.Handlers;
 
 namespace WebAPISelfHost
 {
@@ -18,6 +19,7 @@ namespace WebAPISelfHost
                 "API Default", "api/{controller}/{id}",
                 new { id = RouteParameter.Optional });
 
+            config.MessageHandlers.Add(new AuthenticationHandler());
             using (HttpSelfHostServer server = new HttpSelfHostServer(config))
             {
                 server.OpenAsync().Wait();
