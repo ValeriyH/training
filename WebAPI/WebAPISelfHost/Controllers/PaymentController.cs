@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using WebAPI.Models;
+using WebAPISelfHost.Handlers;
 
 namespace WebAPI.Controllers
 {
@@ -29,6 +30,7 @@ namespace WebAPI.Controllers
 
         //TODO Create loan system. Pay date/amount. history, how much left. calculate and etc.
         // POST api/values
+        [ModelValidationFilter]
         public HttpResponseMessage Post([FromBody]Payment value)
         {
             _data.AddPayment(value);
@@ -36,10 +38,10 @@ namespace WebAPI.Controllers
         }
 
         // PUT api/values/5
+        [ModelValidationFilter]
         public void Put(int id, [FromBody]Payment value)
         {
             _data.UpdatePayment(id, value);
-            //return Request.CreateResponse(HttpStatusCode.OK);
         }
 
         // DELETE api/values/5

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using WebAPI.Filters;
 using WebAPI.Models;
 
 namespace WebAPI.Controllers
@@ -20,6 +21,7 @@ namespace WebAPI.Controllers
         }
 
         // GET api/values/5
+        //[TestFilter]
         public Payment Get(int id)
         {
             return _data.GetPayment(id);

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Configuration;
 using System.IO;
 using System.Linq;
@@ -10,7 +11,11 @@ namespace WebAPI.Models
 {
     public class Payment
     {
+        [Required(ErrorMessage = "Time not set")]
         public DateTime time { get; set; }
+
+        [Required(ErrorMessage ="Payment not set")]
+        [Range(minimum: 1, maximum: 1000, ErrorMessage = "Payment should be between 1 and 1000")]
         public double payment { get; set; }
     }
 
