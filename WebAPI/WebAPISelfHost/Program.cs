@@ -15,6 +15,7 @@ namespace WebAPISelfHost
         {
             var config = new HttpSelfHostConfiguration("http://localhost:8080");
 
+            config.MapHttpAttributeRoutes();
             config.Routes.MapHttpRoute(
                 "API Default", "api/{controller}/{id}",
                 new { id = RouteParameter.Optional });

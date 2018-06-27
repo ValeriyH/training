@@ -13,10 +13,12 @@ namespace WebAPI.Controllers
     public class PaymentController : ApiController
     {
         static PaymentStorage _data = new PaymentStorage();
-        // GET api/values
 
+        // GET api/values
         public IEnumerable<Payment> Get()
         {
+            var principal = RequestContext.Principal;
+            var name = principal.Identity.Name;
             return _data.GetEnumerator();
             //return new string[] { "value1", "value2" };
         }
@@ -51,10 +53,36 @@ namespace WebAPI.Controllers
             return Request.CreateResponse(HttpStatusCode.OK);
         }
 
-        [Route("api/values/{id}/info")]
+        [Route("api/payment/{id}/info")]
         public IEnumerable<string> GetInfo(int id)
         {
             return new string[] { "value1", "value2" };
+        }
+
+        public class UserInfo
+        {
+            public string Name { get; set; }
+            public string Mail { get; set; }
+            public string Accaunt { get; set; }
+        }
+
+        [Route("api/user")]
+        public UserInfo GetUser()
+        {
+            var principal = RequestContext.Principal;
+            var name = principal.Identity.Name;
+
+            var user = new UserInfo
+            {
+                Accaunt = name
+            };
+
+            if (name == "me")
+            {
+                user.Name = "Valeriy";
+                user.Mail = "valeriy@mail.test";
+            }
+            return user;
         }
     }
 }
